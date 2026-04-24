@@ -46,6 +46,20 @@ Generally called from inside per-protocol Runtime Extension packages (`AddOidcId
 4. Calls `registrar.Register(providerSettings, services, configuration)` — services phase.
 5. Registers an `IdentityProviderMapping` in DI capturing a closure over `registrar.Map(providerSettings, endpoints)` — deferred endpoints phase.
 
+### `IIdentityBuilder` / `IdentityBuilder`
+
+The fluent configuration builder passed into the `AddIdentity(configure)` callback in the Runtime Extensions layer. Consumers use it to register application-provided `IUserProvisioner` implementations against their configured instance keys:
+
+```csharp
+builder.AddIdentity(p => p
+    .AddProvisioner<ClientABorrowerProvisioner>("clientA_descope")
+    .AddProvisioner<ClientBBorrowerProvisioner>("clientB_descope"));
+```
+
+`AddProvisioner<TProvisioner>(instanceKey)` registers the provisioner as a keyed scoped service. The identity provider handler resolves the keyed service by `ProvisionContext.Source` (= the instance key) at callback time. `HostBuilder` is exposed on the builder for advanced scenarios that need the underlying `IHostApplicationBuilder`.
+
+Defined here (not duplicated per Runtime Extensions package) so the callback-based API composes identically whether the app installs a single per-protocol package or the umbrella.
+
 ### `IdentityProviderMapping` (stashed in DI)
 
 ```csharp

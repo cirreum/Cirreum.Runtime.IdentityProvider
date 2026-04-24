@@ -25,7 +25,14 @@ Same SRP-split pattern, but:
 
 **`HostApplicationBuilderExtensions`** (`Extensions/Hosting/`)
 - Namespace `Microsoft.Extensions.Hosting` (convention: extension methods placed in the framework namespace they extend, so consumers get them for free).
-- `RegisterIdentityProvider<TRegistrar, TSettings, TInstanceSettings>()` — the one public entry point.
+- `RegisterIdentityProvider<TRegistrar, TSettings, TInstanceSettings>()` — the one public entry point. Config-driven provider registration (invoked by Runtime Extensions packages inside their `AddIdentity(configure)` methods).
+
+**`IIdentityBuilder` / `IdentityBuilder`** (root)
+- Namespace `Cirreum.Identity`.
+- Fluent configuration builder passed into the Runtime Extensions layer's `AddIdentity(Action<IIdentityBuilder> configure)` callback.
+- Single method: `AddProvisioner<TProvisioner>(instanceKey)` — registers the app's concrete `IUserProvisioner` as a keyed scoped service (keyed on instance name = `ProvisionContext.Source`).
+- Exposes `HostBuilder` for advanced scenarios that need the underlying `IHostApplicationBuilder`.
+- Defined here so the callback-based API composes identically regardless of which Runtime Extensions packages the app installs — no per-package duplication.
 
 **`IdentityProviderMapping`** (root)
 - Namespace `Cirreum.Identity` — joins the Identity family's three-namespace convention (`Cirreum.Identity`, `Cirreum.Identity.Configuration`, `Cirreum.Identity.Provisioning`).
