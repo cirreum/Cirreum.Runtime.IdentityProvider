@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<RootNamespace>Cirreum.Runtime</RootNamespace>
+		<Description>The Cirreum Identity Provider for the Cirreum Runtime Server — config-driven registration helper that bootstraps any IdentityProviderRegistrar from Cirreum:Identity:Providers:{ProviderName}.</Description>
+		<PackageTags>cirreum;runtime;server;identity;providers</PackageTags>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.111" />
+		<PackageReference Include="Cirreum.IdentityProvider" Version="1.0.1" />
+	</ItemGroup>
+
+</Project>
