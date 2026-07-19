@@ -11,8 +11,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.115" />
-		<PackageReference Include="Cirreum.IdentityProvider" Version="1.0.6" />
+		<PackageReference Include="Cirreum.Logging.Deferred" Version="1.0.116" />
+		<PackageReference Include="Cirreum.IdentityProvider" Version="1.0.7" />
 	</ItemGroup>
 
 </Project>
