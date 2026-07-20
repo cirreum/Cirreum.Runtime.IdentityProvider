@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Orphaned-provisioner detection (ADR-0030): `AddProvisioner<T>(instanceKey)` now
+  verifies its instance key against the configured identity provider instances at
+  composition time. A key matching no instance emits a deferred **Warning**
+  (fail-fast at startup validation) naming the known instance keys and the expected
+  configuration shape — previously this misconfiguration surfaced only as a silent
+  404 on the provisioning callback route. A key matching only disabled instances
+  emits an **Information** advisory (legitimate per-environment disabling).
+- `RegisterIdentityProvider<,,>()` records every configured instance (enabled or
+  not) into the service collection as the data source for the check.
+
 ## [1.0.6] - 2026-07-19
 
 ### Updated

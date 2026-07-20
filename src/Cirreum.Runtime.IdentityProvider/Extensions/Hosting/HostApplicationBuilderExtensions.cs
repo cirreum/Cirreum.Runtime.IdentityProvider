@@ -79,6 +79,16 @@ public static class HostApplicationBuilderExtensions {
 				return builder;
 			}
 
+			// Record every configured instance (enabled or not) so AddProvisioner can
+			// verify its instance key against the composed set — an unmatched key is a
+			// misconfiguration that would otherwise surface as a silent 404/500.
+			foreach (var (instanceKey, instanceSettings) in providerSettings.Instances) {
+				builder.Services.AddSingleton(new IdentityInstanceRegistration(
+					registrar.ProviderName,
+					instanceKey,
+					instanceSettings.Enabled));
+			}
+
 			// Services-phase registration: let the registrar wire up per-instance DI (keyed
 			// validators, handlers, etc.) using the bound settings.
 			registrar.Register(
