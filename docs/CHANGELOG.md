@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-07-20
+
 ### Added
 
 - Orphaned-provisioner detection (ADR-0030): `AddProvisioner<T>(instanceKey)` now
