@@ -37,7 +37,7 @@ public sealed class IdentityBuilder(IHostApplicationBuilder hostBuilder) : IIden
 				"AddProvisioner<{Provisioner}>(\"{InstanceKey}\") does not match any configured identity " +
 				"provider instance — the provisioner can never be invoked. Configured instance keys: {KnownKeys}. " +
 				"Verify the instance key and the configuration shape " +
-				"(Cirreum:Identity:Providers:{{ProviderName}}:Instances:{{key}}).",
+				"(Cirreum:Identity:Providers:<ProviderName>:Instances:<key>).",
 				typeof(TProvisioner).Name,
 				instanceKey,
 				instances.Count == 0 ? "(none)" : string.Join(", ", instances.Select(i => $"'{i.InstanceKey}'")));

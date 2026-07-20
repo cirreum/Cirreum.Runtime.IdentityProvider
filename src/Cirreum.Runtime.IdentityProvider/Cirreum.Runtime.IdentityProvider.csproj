@@ -15,4 +15,8 @@
 		<PackageReference Include="Cirreum.IdentityProvider" Version="1.0.7" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="Cirreum.Runtime.IdentityProvider.Tests" />
+	</ItemGroup>
+
 </Project>
